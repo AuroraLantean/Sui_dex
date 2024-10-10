@@ -9,6 +9,8 @@ clean :; rm -r build
 format :; movefmt
 build :; sui move build
 test :; sui move test
+test1 :; sui move test eth
+test2 :; sui move test usdc
 test2 :; sui move test dex
 
 new_addr :; sui client new-address ed25519
