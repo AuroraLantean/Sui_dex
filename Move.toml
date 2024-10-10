@@ -19,7 +19,7 @@ Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-fram
 # Override = { local = "../conflicting/version", override = true }
 
 [addresses]
-sui_nft = "0x0"
+packagename = "0x0"
 
 # Named addresses will be accessible in Move as `@name`. They're also exported:
 # for example, `std = "0x1"` is exported by the Standard Library.
@@ -34,4 +34,3 @@ sui_nft = "0x0"
 # The dev-addresses section allows overwriting named addresses for the `--test`
 # and `--dev` modes.
 # alice = "0xB0B"
-
