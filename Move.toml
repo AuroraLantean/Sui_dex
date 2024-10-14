@@ -23,7 +23,7 @@ DeepBook = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui
 # Override = { local = "../conflicting/version", override = true }
 
 [addresses]
-packagename = "0x0"
+package_addr = "0x0"
 #std = "0x1"
 #sui = "0x2"
 #deepbook = "0xdee9"

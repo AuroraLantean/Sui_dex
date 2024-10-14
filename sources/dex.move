@@ -1,4 +1,4 @@
-module packagename::dex {
+module package_addr::dex {
     //use std::debug::print;
     //use std::string::{utf8, String};
     //use std::error;
@@ -14,8 +14,8 @@ module packagename::dex {
   use sui::coin::{Self, TreasuryCap, Coin};
   use deepbook::clob_v2::{Self as clob, Pool};
   use deepbook::custodian_v2::AccountCap;
-  use packagename::eth::ETH;
-  use packagename::usdc::USDC;
+  use package_addr::eth::ETH;
+  use package_addr::usdc::USDC;
 	
 	 // Constants
   const CLIENT_ID: u64 = 122227;//the initial client ID used for placing orders in the DeepBook protocol. Each order placed by the contract will have a unique client ID. 
@@ -35,9 +35,9 @@ module packagename::dex {
 
 	public struct Storage has key {
     id: UID,
-    dex_supply: Supply<DEX>,//the supply of the DEX token, and its type is Supply<DEX>.
-    swaps: Table<address, u64>,//a table with address keys and u64 values. to keep track of the number of swaps performed by each address.
-    account_cap: AccountCap,//related to the account capabilities within the context of the contract.
+    dex_supply: Supply<DEX>,//DEX token supply
+    swaps: Table<address, u64>,//to track the number of swaps performed by each address.
+    account_cap: AccountCap,//account capabilities
     client_id: u64,//used for tracking client IDs within the contract.
 	}
 
@@ -47,7 +47,7 @@ module packagename::dex {
       9,
       b"DEX",
       b"DEX Coin",
-      b"Coin of SUI DEX",
+      b"DEX Coin",
       option::none(),
       ctx
     );//users will get this DEX token on every 2 successful swap
@@ -63,6 +63,17 @@ module packagename::dex {
     });
   }
 
+	//CoinType: any coin type.
+	public fun user_last_mint_epoch<CoinType>(self: &Storage, user: address): u64 {
+    let data = df::borrow<TypeName, Data<CoinType>>(&self.id, get<CoinType>());
 
+    if (table::contains(&data.faucet_lock, user)) return *table::borrow(&data.faucet_lock, user);
+    0
+  }
+
+  public fun user_swap_count(self: &Storage, user: address): u64 {
+    if (table::contains(&self.swaps, user)) return *table::borrow(&self.swaps, user);
+    0
+  }
 
 }

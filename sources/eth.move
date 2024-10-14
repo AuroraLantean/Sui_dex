@@ -1,4 +1,4 @@
-module packagename::eth {
+module package_addr::eth {
 	use sui::coin; 
 	use sui::url;
 	

@@ -1,4 +1,4 @@
-module packagename::usdc {
+module package_addr::usdc {
 	use sui::coin; 
 	use sui::url;
 	

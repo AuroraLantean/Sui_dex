@@ -10,10 +10,17 @@ setup accounts
 sui --version
 make new_addr
 make activate_addr
-sui client switch --address YOUR_ADDRESS
-make balance
-make faucet
-make activate_testnet
+```
+#### Set Network to Testnet
+```
+sui client new-env --alias testnet --rpc https://fullnode.testnet.sui.io:443
+sui client switch --env testnet
+sui client envs
+```
+### Get Test Tokens
+```
+sui client balance
+sui client faucet
 ```
 
 #### Native USDC issued by Circle on Sui
